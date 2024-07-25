@@ -1,0 +1,26 @@
+# Give the stl file location.
+file = open("C:\\Users\\kavin\\Downloads\\myTet 6.stl","r")
+lines = file.readlines()
+tlst = []
+for i in lines:
+    if "vertex" in i:
+        dd = i.split()
+        tlst.append(dd[1:4])
+Area = 0.0
+index = 0
+count = 0
+a = [[0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0]]
+for i in tlst:
+    index = 0
+    for j in i:
+        a[count][index] = float(j)
+        index += 1
+    count += 1
+    if count == 3:
+        count = 0
+        aa = ((a[1][0] - a[0][0])**2 + (a[1][1] - a[0][1])**2 + (a[1][2] - a[0][2])**2)**(0.5)
+        bb = ((a[2][0] - a[1][0])**2 + (a[2][1] - a[1][1])**2 + (a[2][2] - a[1][2])**2)**(0.5)
+        cc = ((a[2][0] - a[0][0])**2 + (a[2][1] - a[0][1])**2 + (a[2][2] - a[0][2])**2)**(0.5)
+        ss = (0.5)*(aa+bb+cc)
+        Area += (ss*(ss-aa)*(ss-bb)*(ss-cc))**(0.5)
+print(Area)
